@@ -22,7 +22,11 @@ $clock = new Clock(
 </head>
 
 <body>
-    <h1>It was <?= $clock->GetHours() . ':' . $clock->GetMinutes() . ':' . $clock->GetSeconds() ?> when the page loaded.</h1>
+    <h1>It's about  <?= $clock->GetHours() . ':' . $clock->GetMinutes() . ':' . $clock->GetSeconds() ?></h1>
+    <p>To time stamp: <?= $clock->ToTimestamp() ?></p>
+    <hr>
+    <?php $clock->SetFromTimestamp('103000'); ?>
+    <p>New ClockTime from timestamp: <?= $clock->GetHours() . ':' . $clock->GetMinutes() . ':' . $clock->GetSeconds() ?></p>
 </body>
 
 </html>

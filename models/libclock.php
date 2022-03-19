@@ -1,5 +1,6 @@
 <?php
- /******************************************************\
+
+/******************************************************\
  *                  Mouflon Solutions™                  *
  *______________________________________________________*
  *                   Alexandre Dosne                    *
@@ -17,6 +18,26 @@ class ClockTime
         $this->seconds = $seconds;
         $this->minutes = $minutes;
         $this->hours = $hours;
+    }
+
+    /**
+     * Keep in mind: not in epoch timestamp format.\
+     * It uses it's own custom format which is way simple and light-weight.
+     */
+    public function ToTimestamp(): string
+    {
+        return $this->GetHours() . $this->GetMinutes() . $this->GetSeconds();
+    }
+
+    /**
+     * Set the current ClockTime values to values specified in a timestamp (custom format).
+     */
+    public function SetFromTimestamp(string $timestamp)
+    {
+        $arr = str_split($timestamp, 2);
+        $this->hours = $arr[0];
+        $this->minutes = $arr[1];
+        $this->seconds = $arr[2];
     }
 
     public function GetSeconds(): string
@@ -54,6 +75,9 @@ class Clock extends ClockTime
         parent::__construct($seconds, $minutes, $hours);
     }
 
+    /**
+     * Perform a time addition.
+     */
     public function AddTime(int $seconds, int $minutes = 0, int $hours = 0): ClockTime
     {
         $this->seconds += $seconds;
